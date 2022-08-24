@@ -13,9 +13,9 @@
 ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    setSize (600, 300);
+    
+    addAndMakeVisible(GUI);
 }
 
 ALHReverbAudioProcessorEditor::~ALHReverbAudioProcessorEditor()
@@ -25,16 +25,24 @@ ALHReverbAudioProcessorEditor::~ALHReverbAudioProcessorEditor()
 //==============================================================================
 void ALHReverbAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    g.fillAll(juce::Colours::lightgrey);
+    
+    
+    if (GUI.rotary1.getValue() == 31) {
+        tby = juce::ImageCache::getFromMemory(BinaryData::tby_png, BinaryData::tby_pngSize);
+        g.drawImageWithin(tby, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
+        
+    }
+    else {
+        background = juce::ImageCache::getFromMemory(BinaryData::bg_png, BinaryData::bg_pngSize);
+        g.drawImageWithin(background, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::doNotResize);
+    }
+    
 }
 
 void ALHReverbAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    juce::Rectangle<int> area = getLocalBounds();
+    
+    GUI.setBounds(area);
 }

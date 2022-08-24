@@ -10,6 +10,8 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "GUIComponent.h"
+
 
 //==============================================================================
 /**
@@ -28,6 +30,12 @@ private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     ALHReverbAudioProcessor& audioProcessor;
+    
+    
+    GUIComponent GUI;
+    juce::Image background;
+    juce::Image tby;
+    
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ALHReverbAudioProcessorEditor)
 };
