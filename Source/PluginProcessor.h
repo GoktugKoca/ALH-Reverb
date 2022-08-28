@@ -57,8 +57,16 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    
+    // Value Trees
+    juce::AudioProcessorValueTreeState apvts;
+    
 
 private:
     //==============================================================================
+    
+    // Parameters
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ALHReverbAudioProcessor)
 };
