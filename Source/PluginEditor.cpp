@@ -82,6 +82,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     addAndMakeVisible(rotary6);
     
     addAndMakeVisible(menuLabel);
+    menuLabel.setLookAndFeel(&lfM);
     menuLabel.setFont(textFont);
     addAndMakeVisible (styleMenu);
     styleMenu.addItem ("ALH 1",  1);
@@ -89,6 +90,8 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     styleMenu.addItem ("Tasoda", 3);
     styleMenu.setSelectedId (1);
     
+    tooltipWindow.setLookAndFeel(&lfM);
+    menuLabel.setTooltip("Impulse Response");
     menuLabel.attachToComponent(&styleMenu, true);
     
     addAndMakeVisible(rotary1Label);

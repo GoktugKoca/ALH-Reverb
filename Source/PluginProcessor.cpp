@@ -199,5 +199,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout ALHReverbAudioProcessor::cre
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "gain", 1 }, "Gain", -24.0, 24.0, 0.0));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "decay", 1 }, "Decay", -24.0, 24.0, 0.0));
     
+    
     return { params.begin(), params.end() };
 }

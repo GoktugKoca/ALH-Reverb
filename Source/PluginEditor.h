@@ -29,6 +29,8 @@ public:
         setColour(juce::Slider::textBoxOutlineColourId, juce::Colour(23.f, 115.f, 57.f, 0.f));
         setColour(juce::Slider::textBoxTextColourId, juce::Colour(0xffAE9D7A));
         setColour(juce::ComboBox::backgroundColourId, juce::Colours::transparentWhite);
+        setColour(juce::TooltipWindow::backgroundColourId, juce::Colours::transparentWhite);
+        setColour(juce::TooltipWindow::outlineColourId, juce::Colours::transparentWhite);
         
         return layout;
     }
@@ -52,6 +54,8 @@ private:
     ALHReverbAudioProcessor& audioProcessor;
     
     MyLookAndFeel lfM;
+    
+    juce::TooltipWindow tooltipWindow;
      
     juce::Slider rotary1;
     juce::Slider rotary2;
@@ -70,12 +74,14 @@ private:
     juce::ComboBox styleMenu;
     juce::Font labelFont {13.0f};
     
-    //==============================
-    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
-    
     juce::Image background;
     juce::Image tby;
     
+    //===============================================
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
     
+   
+    
+    //===============================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ALHReverbAudioProcessorEditor)
 };
