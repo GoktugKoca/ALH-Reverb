@@ -76,10 +76,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary5.setValue(0.0f);
     rotary5.setTextValueSuffix(" dB");
     
-    
     gainSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "gain", rotary5);
-    
-   
     
     rotary6.setRange(0.0f, 100.0f, 0.1f);
     rotary6.setValue(50.0f);
