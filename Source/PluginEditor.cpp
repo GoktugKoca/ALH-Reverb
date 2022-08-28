@@ -13,15 +13,7 @@
 ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProcessor& p)
 : AudioProcessorEditor (&p), audioProcessor (p)
 {
-   
-
-    //    getLookAndFeel().setColour(juce::Slider::rotarySliderFillColourId, juce::Colour(0xff4AABE1)); // Blue Jeans
-    //    getLookAndFeel().setColour(juce::Slider::thumbColourId, juce::Colour(0xffAE9D7A)); // Grullo
-    //    getLookAndFeel().setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xffb76a5e)); // Copper
-    //    getLookAndFeel().setColour(juce::Slider::textBoxOutlineColourId, juce::Colour(23.f, 115.f, 57.f, 0.f)); // bunu transparent yapmaya calısıyorum ama olmuyor
-    //    getLookAndFeel().setColour(juce::Slider::textBoxTextColourId, juce::Colour(0xffAE9D7A));
     getLookAndFeel().setColour(juce::ComboBox::backgroundColourId, juce::Colours::transparentWhite);
-    
     
     rotary1.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // vertical? horizontal? ya da her ikisi birden mi?
     rotary2.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // e.g., ableton vertical kullanıyor
@@ -72,10 +64,9 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary4.setValue(100);
     rotary4.setTextValueSuffix(" %");
     
-    rotary5.setRange(-10.0f, 10.0f, 0.1f);
     rotary5.setValue(0.0f);
     rotary5.setTextValueSuffix(" dB");
-    
+    // connection between the rotary and the apvst parameter
     gainSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "gain", rotary5);
     
     rotary6.setRange(0.0f, 100.0f, 0.1f);
@@ -115,11 +106,10 @@ void ALHReverbAudioProcessorEditor::paint (juce::Graphics& g)
 {
     g.fillAll(juce::Colours::lightgrey);
     
-    
-    if (rotary1.getValue() == 31) {
+    // Background image
+    if (rotary5.getValue() == 3.10f) {
         tby = juce::ImageCache::getFromMemory(BinaryData::tby_png, BinaryData::tby_pngSize);
         g.drawImageWithin(tby, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
-        
     }
     else {
         background = juce::ImageCache::getFromMemory(BinaryData::bg_png, BinaryData::bg_pngSize);

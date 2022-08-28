@@ -12,9 +12,7 @@
 #include "PluginProcessor.h"
 
 
-//==============================================================================
-/**
- */
+// ======= GUI customization ===================================================
 class MyLookAndFeel : public juce::LookAndFeel_V4
 {
 public:
@@ -62,7 +60,6 @@ private:
     juce::Slider rotary5;
     juce::Slider rotary6;
     
-    
     juce::Label rotary1Label;
     juce::Label rotary2Label;
     juce::Label rotary3Label;
@@ -71,9 +68,9 @@ private:
     juce::Label menuLabel { {}, "IR:" };
     juce::Font textFont   { 17.0f };
     juce::ComboBox styleMenu;
-    
     juce::Font labelFont {13.0f};
     
+    //==============================
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> gainSliderAttachment;
     
     juce::Image background;

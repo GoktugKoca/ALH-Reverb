@@ -19,7 +19,7 @@ ALHReverbAudioProcessor::ALHReverbAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       ), apvts(*this, nullptr, "PARAMETERS", createParameterLayout())
+                       ), apvts(*this, nullptr, "PARAMETERS", createParameterLayout()) // apvts construction
 #endif
 {
 }
@@ -138,6 +138,7 @@ void ALHReverbAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    // Decibels to gain conversion
     float dbGain = *apvts.getRawParameterValue("gain");
     float rawGain = juce::Decibels::decibelsToGain(dbGain);
     
@@ -189,6 +190,8 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
     return new ALHReverbAudioProcessor();
 }
 
+
+//==== PARAMETERS =========================
 juce::AudioProcessorValueTreeState::ParameterLayout ALHReverbAudioProcessor::createParameterLayout()
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
