@@ -45,6 +45,8 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     
+    MyLookAndFeel lfM;
+    
     juce::Slider rotary1;
     juce::Slider rotary2;
     juce::Slider rotary3;
@@ -67,5 +69,5 @@ public:
 private:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GUIComponent)
     
-    MyLookAndFeel lfM;
+    
 };
