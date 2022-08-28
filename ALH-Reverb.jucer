@@ -3,10 +3,11 @@
 <JUCERPROJECT id="bkSRGz" name="ALH-Reverb" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginManufacturer="GGM"
               aaxIdentifier="com.ggm.ALHReverb" pluginVST3Category="Reverb"
-              pluginAAXCategory="8" cppLanguageStandard="17">
+              pluginAAXCategory="8" companyName="GGM" cppLanguageStandard="17">
   <MAINGROUP id="F7ms5d" name="ALH-Reverb">
     <GROUP id="{D15124F9-8729-EC86-B629-31D21C025DBB}" name="Source">
       <GROUP id="{F92CA60F-0283-DD7E-CDF3-46AD1F03DA09}" name="Assets">
+        <FILE id="FHp9Pk" name="DemoUtilities.h" compile="0" resource="0" file="Source/Assets/DemoUtilities.h"/>
         <FILE id="BXLSNr" name="bg.png" compile="0" resource="1" file="Source/Assets/bg.png"/>
         <FILE id="ZKel5R" name="tby.png" compile="0" resource="1" file="Source/Assets/tby.png"/>
       </GROUP>

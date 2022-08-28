@@ -10,7 +10,7 @@
 
 #include <JuceHeader.h>
 #include "GUIComponent.h"
-
+#inclde "DemoUtilities.h"
 
 //==============================================================================
 
@@ -104,15 +104,6 @@ public:
     void changeProgramName (int index, const juce::String& newName) override;
 
     //==============================================================================
-    void getStateInformation (juce::MemoryBlock& destData) override
-    {
-        copyXmlToBinary (*apvts.copyState().createXml(), destData);
-    }
-
-    void setStateInformation (const void* data, int sizeInBytes) override
-    {
-        apvts.replaceState (ValueTree::fromXml (*getXmlFromBinary (data, sizeInBytes)));
-    }
 
     int getCurrentIRSize() const { return irSize; }
 
