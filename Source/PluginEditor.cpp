@@ -37,6 +37,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary1Label.setFont(labelFont);
     rotary1Label.setJustificationType (juce::Justification::centred);
     rotary1Label.setColour(juce::Label::textColourId, juce::Colour(0xffAE9D7A));
+    decaySliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "decay", rotary1);
     
     rotary1.setLookAndFeel(&lfM);
     rotary2.setLookAndFeel(&lfM);
@@ -53,16 +54,18 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary2Label.setFont(labelFont);
     rotary2Label.setJustificationType(juce::Justification::centred);
     rotary2Label.setColour(juce::Label::textColourId, juce::Colour(0xffAE9D7A));
+    sizeSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "size", rotary2);
     
     
     rotary3.setRange(0.00f, 1000.f, 0.01f);
     rotary3.setValue(0.00f);
     rotary3.setTextValueSuffix(" ms");
-    
-    
+    predelaySliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "predelay", rotary3);
+
     rotary4.setRange(0, 100, 1);
     rotary4.setValue(100);
     rotary4.setTextValueSuffix(" %");
+    widthSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "width", rotary4);
     
     rotary5.setValue(0.0f);
     rotary5.setTextValueSuffix(" dB");
@@ -72,7 +75,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary6.setRange(0.0f, 100.0f, 0.1f);
     rotary6.setValue(50.0f);
     rotary6.setTextValueSuffix(" %");
-    
+    drywetSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "drywet", rotary6);
     
     addAndMakeVisible(rotary1);
     addAndMakeVisible(rotary2);

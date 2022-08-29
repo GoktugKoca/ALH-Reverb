@@ -196,8 +196,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout ALHReverbAudioProcessor::cre
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
     
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "decay", 1 }, "Decay", 1, 200, 100));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "size", 1 }, "Size", 50, 200, 100));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "predelay", 1 }, "Predelay", 0.00, 200.0, 0.00));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "width", 1 }, "Width", 0.0, 100.0, 100));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "gain", 1 }, "Gain", -24.0, 24.0, 0.0));
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "decay", 1 }, "Decay", -24.0, 24.0, 0.0));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "drywet", 1 }, "Dry/Wet", 0.0, 100, 50.0));
     
     
     return { params.begin(), params.end() };
