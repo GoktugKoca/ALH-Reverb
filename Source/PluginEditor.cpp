@@ -48,6 +48,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     
     rotary2.setRange(0.0, 200.0, 1);
     rotary2.setValue(100);
+    rotary2.setSkewFactorFromMidPoint(100);
     rotary2.setTextValueSuffix(" %");
     rotary2.setPopupMenuEnabled(true);
     rotary2Label.setText("Size", juce::dontSendNotification);
