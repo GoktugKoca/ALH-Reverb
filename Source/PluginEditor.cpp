@@ -34,7 +34,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary4.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     rotary5.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     rotary6.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
-    rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 10);
+   // rotary1.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 10);
     rotary2.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 10);
     rotary3.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 10);
     rotary4.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 10);
@@ -43,7 +43,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     
     rotary1.setRange(0.0, 200.0, 1);
     rotary1.setValue(100);
-    rotary1.setTextValueSuffix(" %");
+    // rotary1.setTextValueSuffix(" %");
     //    rotary1.setPopupDisplayEnabled(true, true, &rotary1Label);
     rotary1.setPopupMenuEnabled(true);
     rotary1Label.setText("Decay", juce::dontSendNotification);
@@ -136,7 +136,8 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     addAndMakeVisible(rotary6Label);
 
     addAndMakeVisible(openIRFileButton);
-    openIRFileButton.setButtonText("Open IR File...");
+    openIRFileButton.setLookAndFeel(&lfM);
+    openIRFileButton.setButtonText("Open IR File");
     openIRFileButton.onClick = [this] { openButtonClicked(); };
     addAndMakeVisible(irFileLabel);
     irFileLabel.setText("", juce::dontSendNotification);
@@ -202,7 +203,7 @@ void ALHReverbAudioProcessorEditor::resized()
     rotary5.setBounds(rightSlidersArea.removeFromTop(rightSlidersArea.getHeight()/2));
     rotary6.setBounds(rightSlidersArea);
 
-    openIRFileButton.setBounds(120, 150, 30, 30);
+    openIRFileButton.setBounds(120, 150, 50, 30);
     
     rotary1Label.setBounds(rotary1.getX(), rotary1.getY() - 10, rotary1.getWidth(), 10);
     rotary2Label.setBounds(rotary2.getX(), rotary2.getY() - 10, rotary2.getWidth(), 10);

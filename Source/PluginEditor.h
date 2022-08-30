@@ -52,6 +52,9 @@ public:
         setColour(juce::ToggleButton::textColourId, juce::Colour(0xffAE9D7A));
         setColour(juce::ToggleButton::tickDisabledColourId, juce::Colour(0xffb76a5e));
         setColour(juce::ToggleButton::tickColourId, juce::Colour(0xff4AABE1));
+
+        setColour(juce::TextButton::buttonColourId, juce::Colour(0x1a1a1a));
+        setColour(juce::TextButton::textColourOffId, juce::Colour(0xffAE9D7A));
         
         setColour(juce::Label::textColourId, juce::Colour(0xffAE9D7A));
 
