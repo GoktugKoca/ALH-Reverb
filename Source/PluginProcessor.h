@@ -15,7 +15,7 @@
 //==============================================================================
 /**
 */
-class ALHReverbAudioProcessor  : public juce::AudioProcessor
+class ALHReverbAudioProcessor  : public juce::AudioProcessor, juce::AudioProcessorValueTreeState::Listener
                             #if JucePlugin_Enable_ARA
                              , public juce::AudioProcessorARAExtension
                             #endif
@@ -86,10 +86,13 @@ private:
     juce::dsp::DryWetMixer<float> dryWetMixer;
     juce::dsp::DelayLine<float> delay;
     juce::dsp::Convolution convolver;
+
+    
     
     
     // Parameters
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    void parameterChanged(const juce::String& parameterID, float newValue) override;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ALHReverbAudioProcessor)
 };

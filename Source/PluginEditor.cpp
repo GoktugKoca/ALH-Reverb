@@ -51,7 +51,8 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary1Label.setJustificationType (juce::Justification::centred);
     rotary1Label.setColour(juce::Label::textColourId, juce::Colour(0xffAE9D7A));
     decaySliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "decay", rotary1);
-    
+
+
     
     rotary2.setRange(0.0, 200.0, 1);
     rotary2.setValue(100);
@@ -144,6 +145,8 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     irFileLabel.setJustificationType(juce::Justification::centredLeft);
     juce::TextButton openIRFileButton;
     juce::Label irFileLabel;
+
+    formatManager.registerBasicFormats();
     
     setSize (600, 300);
 }
@@ -163,11 +166,50 @@ void ALHReverbAudioProcessorEditor::paint (juce::Graphics& g)
         g.drawImageWithin(tby, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::stretchToFit);
     }
     else {
-        background = juce::ImageCache::getFromMemory(BinaryData::bg_png, BinaryData::bg_pngSize);
+        background = juce::ImageCache::getFromMemory(BinaryData::bg2_png, BinaryData::bg2_pngSize);
         g.drawImageWithin(background, 0, 0, getWidth(), getHeight(), juce::RectanglePlacement::doNotResize);
     }
+
+  
     
+    if (shouldPaintWaveform == true) {
+        const int waveformWidth = 80 * 3;
+        const int waveformHeight = 100;
+
+        g.setColour(juce::Colour(0xff4AABE1));
+        
+        juce::Path waveformPath;
+        waveformValues.clear();
+        waveformPath.startNewSubPath(130, waveformHeight + 20);
+
+        auto buffer = audioProcessor.getModifiedIR();
+        if (buffer.getNumSamples() < 1) {
+            buffer = audioProcessor.getOriginalIR();
+        }
+        const float waveformResolution = 1024.0f;
+        const int ratio =
+            static_cast<int>(buffer.getNumSamples() / waveformResolution);
+
+        auto bufferPointer = buffer.getReadPointer(0);
+        for (int sample = 0; sample < buffer.getNumSamples(); sample += ratio) {
+            waveformValues.push_back(juce::Decibels::gainToDecibels<float>(
+                std::fabsf(bufferPointer[sample]), -72.0f));
+        }
+        for (int xPos = 0; xPos < waveformValues.size(); ++xPos) {
+            auto yPos = juce::jmap<float>(waveformValues[xPos], -72.0f, 0.0f,
+                waveformHeight + 20, 60);
+            waveformPath.lineTo(130 + xPos / waveformResolution * waveformWidth, yPos);
+        }
+
+        g.strokePath(waveformPath, juce::PathStrokeType(2.0f));
+       
+
+        shouldPaintWaveform = false;
+    }
+
+
 }
+    
 
 void ALHReverbAudioProcessorEditor::resized()
 {
@@ -203,7 +245,7 @@ void ALHReverbAudioProcessorEditor::resized()
     rotary5.setBounds(rightSlidersArea.removeFromTop(rightSlidersArea.getHeight()/2));
     rotary6.setBounds(rightSlidersArea);
 
-    openIRFileButton.setBounds(120, 150, 50, 30);
+    openIRFileButton.setBounds(120, 160, 50, 30);
     
     rotary1Label.setBounds(rotary1.getX(), rotary1.getY() - 10, rotary1.getWidth(), 10);
     rotary2Label.setBounds(rotary2.getX(), rotary2.getY() - 10, rotary2.getWidth(), 10);
@@ -224,7 +266,7 @@ void ALHReverbAudioProcessorEditor::openButtonClicked() {
     fileChooser = std::make_unique<juce::FileChooser>(
         "Choose a support IR File (WAV, AIFF, OGG)...", juce::File(),
         "*.wav;*.aif;*.aiff;*.ogg", true, false);
-    formatManager.registerBasicFormats();
+    
     
     auto chooserFlags = juce::FileBrowserComponent::openMode |
         juce::FileBrowserComponent::canSelectFiles;

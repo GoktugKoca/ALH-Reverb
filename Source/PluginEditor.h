@@ -74,6 +74,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     
+    bool shouldPaintWaveform = false;
    
     
 private:
@@ -131,8 +132,9 @@ private:
 
 
     std::vector<float> waveformValues;
-    bool shouldPaintWaveform = false;
+    
     bool enableIRParameters = false;
+
 
     
     //===============================================

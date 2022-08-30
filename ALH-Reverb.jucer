@@ -59,6 +59,7 @@
       <GROUP id="{F92CA60F-0283-DD7E-CDF3-46AD1F03DA09}" name="Assets">
         <FILE id="BXLSNr" name="bg.png" compile="0" resource="1" file="Source/Assets/bg.png"/>
         <FILE id="ZKel5R" name="tby.png" compile="0" resource="1" file="Source/Assets/tby.png"/>
+        <FILE id="iirV9U" name="bg2.png" compile="0" resource="1" file="Source/Assets/bg2.png"/>
       </GROUP>
       <FILE id="y0qLmB" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
