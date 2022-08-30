@@ -5,6 +5,56 @@
               aaxIdentifier="com.ggm.ALHReverb" pluginVST3Category="Reverb"
               pluginAAXCategory="8" cppLanguageStandard="17" companyName="GGM">
   <MAINGROUP id="F7ms5d" name="ALH-Reverb">
+    <GROUP id="{2363EDCD-6B0B-B080-35C6-478ED9CA58AC}" name="soundtouch">
+      <FILE id="gNZOqn" name="AAFilter.cpp" compile="1" resource="0" file="soundtouch/AAFilter.cpp"/>
+      <FILE id="U8hF0C" name="AAFilter.h" compile="0" resource="0" file="soundtouch/AAFilter.h"/>
+      <FILE id="nL93Dz" name="BPMDetect.cpp" compile="1" resource="0" file="soundtouch/BPMDetect.cpp"/>
+      <FILE id="rtUFbH" name="BPMDetect.h" compile="0" resource="0" file="soundtouch/BPMDetect.h"/>
+      <FILE id="pinYOJ" name="COPYING.TXT" compile="0" resource="1" file="soundtouch/COPYING.TXT"/>
+      <FILE id="Lp4Slr" name="cpu_detect.h" compile="0" resource="0" file="soundtouch/cpu_detect.h"/>
+      <FILE id="CjBjaw" name="cpu_detect_x86.cpp" compile="1" resource="0"
+            file="soundtouch/cpu_detect_x86.cpp"/>
+      <FILE id="mygLib" name="FIFOSampleBuffer.cpp" compile="1" resource="0"
+            file="soundtouch/FIFOSampleBuffer.cpp"/>
+      <FILE id="vSn7ZM" name="FIFOSampleBuffer.h" compile="0" resource="0"
+            file="soundtouch/FIFOSampleBuffer.h"/>
+      <FILE id="oxB90o" name="FIFOSamplePipe.h" compile="0" resource="0"
+            file="soundtouch/FIFOSamplePipe.h"/>
+      <FILE id="bBodnh" name="FIRFilter.cpp" compile="1" resource="0" file="soundtouch/FIRFilter.cpp"/>
+      <FILE id="WNFe7F" name="FIRFilter.h" compile="0" resource="0" file="soundtouch/FIRFilter.h"/>
+      <FILE id="rJLs6y" name="InterpolateCubic.cpp" compile="1" resource="0"
+            file="soundtouch/InterpolateCubic.cpp"/>
+      <FILE id="lEO6PF" name="InterpolateCubic.h" compile="0" resource="0"
+            file="soundtouch/InterpolateCubic.h"/>
+      <FILE id="NNJ70o" name="InterpolateLinear.cpp" compile="1" resource="0"
+            file="soundtouch/InterpolateLinear.cpp"/>
+      <FILE id="VBCC0N" name="InterpolateLinear.h" compile="0" resource="0"
+            file="soundtouch/InterpolateLinear.h"/>
+      <FILE id="dXDsYt" name="InterpolateShannon.cpp" compile="1" resource="0"
+            file="soundtouch/InterpolateShannon.cpp"/>
+      <FILE id="szEGmF" name="InterpolateShannon.h" compile="0" resource="0"
+            file="soundtouch/InterpolateShannon.h"/>
+      <FILE id="JIeJED" name="mmx_optimized.cpp" compile="1" resource="0"
+            file="soundtouch/mmx_optimized.cpp"/>
+      <FILE id="tWOzUd" name="PeakFinder.cpp" compile="1" resource="0" file="soundtouch/PeakFinder.cpp"/>
+      <FILE id="nbOU2W" name="PeakFinder.h" compile="0" resource="0" file="soundtouch/PeakFinder.h"/>
+      <FILE id="c4CW5L" name="RateTransposer.cpp" compile="1" resource="0"
+            file="soundtouch/RateTransposer.cpp"/>
+      <FILE id="ZjLMMx" name="RateTransposer.h" compile="0" resource="0"
+            file="soundtouch/RateTransposer.h"/>
+      <FILE id="M4psa7" name="README.html" compile="0" resource="1" file="soundtouch/README.html"/>
+      <FILE id="KF3tMG" name="SoundTouch.cpp" compile="1" resource="0" file="soundtouch/SoundTouch.cpp"/>
+      <FILE id="P1Nqei" name="SoundTouch.h" compile="0" resource="0" file="soundtouch/SoundTouch.h"/>
+      <FILE id="iUO1TW" name="soundtouch_config.h" compile="0" resource="0"
+            file="soundtouch/soundtouch_config.h"/>
+      <FILE id="ijJenv" name="soundtouch_config.h.in" compile="0" resource="1"
+            file="soundtouch/soundtouch_config.h.in"/>
+      <FILE id="bNTOvD" name="sse_optimized.cpp" compile="1" resource="0"
+            file="soundtouch/sse_optimized.cpp"/>
+      <FILE id="A1ubvZ" name="STTypes.h" compile="0" resource="0" file="soundtouch/STTypes.h"/>
+      <FILE id="mwkDTB" name="TDStretch.cpp" compile="1" resource="0" file="soundtouch/TDStretch.cpp"/>
+      <FILE id="VQowCo" name="TDStretch.h" compile="0" resource="0" file="soundtouch/TDStretch.h"/>
+    </GROUP>
     <GROUP id="{D15124F9-8729-EC86-B629-31D21C025DBB}" name="Source">
       <GROUP id="{F92CA60F-0283-DD7E-CDF3-46AD1F03DA09}" name="Assets">
         <FILE id="BXLSNr" name="bg.png" compile="0" resource="1" file="Source/Assets/bg.png"/>
@@ -24,7 +74,7 @@
     <VS2022 targetFolder="Builds/VisualStudio2022">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="ALH-Reverb"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="ALH-Reverb"/>
+        <CONFIGURATION isDebug="1" name="Release" targetName="ALH-Reverb"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../JUCE/modules"/>
