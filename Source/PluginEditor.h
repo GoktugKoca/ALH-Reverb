@@ -26,12 +26,18 @@ public:
         setColour(juce::Slider::rotarySliderFillColourId, juce::Colour(0xff4AABE1)); // Blue Jeans
         setColour(juce::Slider::thumbColourId, juce::Colour(0xffAE9D7A)); // Grullo
         setColour(juce::Slider::rotarySliderOutlineColourId, juce::Colour(0xffb76a5e)); // Copper
-        setColour(juce::Slider::textBoxOutlineColourId, juce::Colour(23.f, 115.f, 57.f, 0.f));
+        setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentWhite);
         setColour(juce::Slider::textBoxTextColourId, juce::Colour(0xffAE9D7A));
         setColour(juce::ComboBox::backgroundColourId, juce::Colours::transparentWhite);
         setColour(juce::TooltipWindow::backgroundColourId, juce::Colours::transparentWhite);
         setColour(juce::TooltipWindow::outlineColourId, juce::Colours::transparentWhite);
-        
+        setColour(juce::TextEditor::highlightedTextColourId, juce::Colours::black);
+        setColour(juce::TextEditor::outlineColourId, juce::Colours::transparentWhite);
+        setColour(juce::TextEditor::focusedOutlineColourId, juce::Colours::transparentWhite);
+        setColour(juce::TextEditor::backgroundColourId, juce::Colour(0x1a1a1a));
+        setColour(juce::TextEditor::textColourId, juce::Colour(0xffAE9D7A));
+        setColour(juce::TextEditor::shadowColourId, juce::Colours::transparentWhite);
+
         return layout;
     }
 };

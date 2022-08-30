@@ -15,6 +15,13 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
 {
     getLookAndFeel().setColour(juce::ComboBox::backgroundColourId, juce::Colours::transparentWhite);
     
+    rotary1.setLookAndFeel(&lfM);
+    rotary2.setLookAndFeel(&lfM);
+    rotary3.setLookAndFeel(&lfM);
+    rotary4.setLookAndFeel(&lfM);
+    rotary5.setLookAndFeel(&lfM);
+    rotary6.setLookAndFeel(&lfM);
+    
     rotary1.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // vertical? horizontal? ya da her ikisi birden mi?
     rotary2.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // e.g., ableton vertical kullanıyor
     rotary3.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
@@ -39,12 +46,6 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary1Label.setColour(juce::Label::textColourId, juce::Colour(0xffAE9D7A));
     decaySliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "decay", rotary1);
     
-    rotary1.setLookAndFeel(&lfM);
-    rotary2.setLookAndFeel(&lfM);
-    rotary3.setLookAndFeel(&lfM);
-    rotary4.setLookAndFeel(&lfM);
-    rotary5.setLookAndFeel(&lfM);
-    rotary6.setLookAndFeel(&lfM);
     
     rotary2.setRange(0.0, 200.0, 1);
     rotary2.setValue(100);

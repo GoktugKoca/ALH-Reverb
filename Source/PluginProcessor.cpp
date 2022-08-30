@@ -204,10 +204,19 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 juce::AudioProcessorValueTreeState::ParameterLayout ALHReverbAudioProcessor::createParameterLayout()
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    juce::NormalisableRange<float> decayRange = juce::NormalisableRange<float>(1.f, 200.f, 1.f);
+    decayRange.setSkewForCentre(100.f);
+
+    juce::NormalisableRange<float> sizeRange = juce::NormalisableRange<float>(50.f, 200.f, 0.1f);
+    sizeRange.setSkewForCentre(100.0f);
+
+    juce::NormalisableRange<float> predelayRange = juce::NormalisableRange<float>(0.00, 200.0, 0.05f);
+    predelayRange.setSkewForCentre(50.0f);
     
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "decay", 1 }, "Decay", 1, 200, 100));
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "size", 1 }, "Size", juce::NormalisableRange<float>(50.f, 200.f, 1.f, 0.65f), 100.f));
-    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "predelay", 1 }, "Predelay", 0.00, 200.0, 0.00));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "decay", 1 }, "Decay", decayRange, 100));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "size", 1 }, "Size", sizeRange, 100.f));
+    params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "predelay", 1 }, "Predelay", predelayRange, 0.00f));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "width", 1 }, "Width", 0.0, 100.0, 100));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "gain", 1 }, "Gain", -24.0, 24.0, 0.0));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "drywet", 1 }, "Dry/Wet", 0.0, 100, 50.0));
