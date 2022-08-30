@@ -95,7 +95,13 @@ private:
     juce::Label rotary1Label;
     juce::Label rotary2Label;
     juce::Label rotary3Label;
+    juce::Label rotary4Label;
+    juce::Label rotary5Label;
+    juce::Label rotary6Label;
     juce::Rectangle<int> middleRect;
+
+    juce::TextButton openIRFileButton;
+    juce::Label irFileLabel;
     
     juce::Label menuLabel { {}, "IR:" };
     juce::Font textFont   { 17.0f };
@@ -115,6 +121,16 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassButtonAttachment;
     
    
+    void openButtonClicked();
+    juce::AudioFormatManager formatManager;
+    std::unique_ptr<juce::FileChooser> fileChooser;
+
+
+
+    std::vector<float> waveformValues;
+    bool shouldPaintWaveform = false;
+    bool enableIRParameters = false;
+
     
     //===============================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ALHReverbAudioProcessorEditor)

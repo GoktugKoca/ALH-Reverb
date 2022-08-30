@@ -9,12 +9,13 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "../soundtouch/SoundTouch.h"
 
 
 //==============================================================================
 /**
 */
-class ALHReverbAudioProcessor  : public juce::AudioProcessor, juce::AudioProcessorValueTreeState::Listener
+class ALHReverbAudioProcessor  : public juce::AudioProcessor
                             #if JucePlugin_Enable_ARA
                              , public juce::AudioProcessorARAExtension
                             #endif
@@ -57,19 +58,38 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
+    void setIRBufferSize(int newNumChannels, int newNumSamples,
+        bool keepExistingContent = false,
+        bool clearExtraSpace = false,
+        bool avoidReallocating = false);
+    juce::AudioBuffer<float>& getOriginalIR();
+    juce::AudioBuffer<float>& getModifiedIR();
+
+    void loadImpulseResponse();
+    void updateImpulseResponse(juce::AudioBuffer<float> irBuffer);
+
+    void updateIRParameters();
+
     // Value Trees
     juce::AudioProcessorValueTreeState apvts;
     
 
 private:
     //==============================================================================
+   
+    juce::AudioBuffer<float> originalIRBuffer;
+    juce::AudioBuffer<float> modifiedIRBuffer;
 
-    float rawGain = 1.0;
+    soundtouch::SoundTouch soundtouch;
 
+    juce::dsp::Gain<float> outputGainer;
+    juce::dsp::DryWetMixer<float> dryWetMixer;
+    juce::dsp::DelayLine<float> delay;
+    juce::dsp::Convolution convolver;
+    
     
     // Parameters
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    void parameterChanged (const juce::String& parameterID, float newValue) override;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ALHReverbAudioProcessor)
 };
