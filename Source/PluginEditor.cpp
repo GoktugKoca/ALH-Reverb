@@ -21,6 +21,12 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary4.setLookAndFeel(&lfM);
     rotary5.setLookAndFeel(&lfM);
     rotary6.setLookAndFeel(&lfM);
+    bypassButton.setLookAndFeel(&lfM);
+
+    bypassButton.setToggleState(false, false);
+
+    bypassButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.apvts, "bypass", bypassButton);
+    
     
     rotary1.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // vertical? horizontal? ya da her ikisi birden mi?
     rotary2.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // e.g., ableton vertical kullanıyor
@@ -78,6 +84,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary6.setValue(50.0f);
     rotary6.setTextValueSuffix(" %");
     drywetSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "drywet", rotary6);
+
     
     addAndMakeVisible(rotary1);
     addAndMakeVisible(rotary2);
@@ -85,6 +92,10 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     addAndMakeVisible(rotary4);
     addAndMakeVisible(rotary5);
     addAndMakeVisible(rotary6);
+
+    addAndMakeVisible(bypassButton);
+    addAndMakeVisible(reverseButton);
+
     
     addAndMakeVisible(menuLabel);
     menuLabel.setLookAndFeel(&lfM);
@@ -94,6 +105,8 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     styleMenu.addItem ("ALH 2",   2);
     styleMenu.addItem ("Tasoda", 3);
     styleMenu.setSelectedId (1);
+
+    styleMenu.setLookAndFeel(&lfM);
     
     tooltipWindow.setLookAndFeel(&lfM);
     menuLabel.setTooltip("Impulse Response");
@@ -162,6 +175,8 @@ void ALHReverbAudioProcessorEditor::resized()
     
     rotary1Label.setBounds(rotary1.getX(), rotary1.getY() - 10, rotary1.getWidth(), 10);
     rotary2Label.setBounds(rotary2.getX(), rotary2.getY() - 10, rotary2.getWidth(), 10);
+
+    bypassButton.setBounds(120, 205, 60, 20);
     
     styleMenu.setBounds(150,240,320,22);
 }

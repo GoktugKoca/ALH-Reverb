@@ -220,6 +220,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ALHReverbAudioProcessor::cre
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "width", 1 }, "Width", 0.0, 100.0, 100));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "gain", 1 }, "Gain", -24.0, 24.0, 0.0));
     params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "drywet", 1 }, "Dry/Wet", 0.0, 100, 50.0));
+    params.push_back (std::make_unique<juce::AudioParameterBool>(juce::ParameterID{ "bypass", 1 }, "Bypass", false));
     
 
     return { params.begin(), params.end() };
