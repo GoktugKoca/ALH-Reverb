@@ -22,10 +22,22 @@ ALHReverbAudioProcessor::ALHReverbAudioProcessor()
                        ), apvts(*this, nullptr, "PARAMETERS", createParameterLayout()) // apvts construction
 #endif
 {
+    apvts.addParameterListener("decay", this);
+    apvts.addParameterListener("size", this);
+    apvts.addParameterListener("predelay", this);
+    apvts.addParameterListener("width", this);
+    apvts.addParameterListener("gain", this);
+    apvts.addParameterListener("drywet", this);
 }
 
 ALHReverbAudioProcessor::~ALHReverbAudioProcessor()
 {
+    apvts.removeParameterListener("decay", this);
+    apvts.removeParameterListener("size", this);
+    apvts.removeParameterListener("predelay", this);
+    apvts.removeParameterListener("width", this);
+    apvts.removeParameterListener("gain", this);
+    apvts.removeParameterListener("drywet", this);
 }
 
 //==============================================================================
@@ -138,10 +150,6 @@ void ALHReverbAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // Decibels to gain conversion
-    float dbGain = *apvts.getRawParameterValue("gain");
-    float rawGain = juce::Decibels::decibelsToGain(dbGain);
-    
     
     // Audio block object
     juce::dsp::AudioBlock<float> block (buffer);
@@ -172,15 +180,16 @@ juce::AudioProcessorEditor* ALHReverbAudioProcessor::createEditor()
 //==============================================================================
 void ALHReverbAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    // Save parameters
+    juce::MemoryOutputStream stream(destData, false);
+    apvts.state.writeToStream(stream);
 }
 
 void ALHReverbAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    // Recall parameters
+    auto tree = juce::ValueTree::readFromData(data, size_t(sizeInBytes));
+    apvts.state = tree;
 }
 
 //==============================================================================
@@ -205,4 +214,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout ALHReverbAudioProcessor::cre
     
 
     return { params.begin(), params.end() };
+}
+
+void ALHReverbAudioProcessor::parameterChanged(const juce::String& parameterID, float newValue)
+{
+    if (parameterID == "gain")
+    {
+        rawGain = juce::Decibels::decibelsToGain(newValue);
+    }
 }
