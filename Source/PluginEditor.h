@@ -74,7 +74,7 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     
-    bool shouldPaintWaveform = false;
+    
    
     
 private:
@@ -123,6 +123,7 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> drywetSliderAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> decaySliderAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> bypassButtonAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ButtonAttachment> reverseButtonAttachment;
     
    
     void openButtonClicked();
@@ -134,7 +135,7 @@ private:
     std::vector<float> waveformValues;
     
     bool enableIRParameters = false;
-
+    bool shouldPaintWaveform = false;
 
     
     //===============================================

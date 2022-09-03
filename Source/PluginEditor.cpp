@@ -22,11 +22,19 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary5.setLookAndFeel(&lfM);
     rotary6.setLookAndFeel(&lfM);
     bypassButton.setLookAndFeel(&lfM);
+    reverseButton.setLookAndFeel(&lfM);
 
     bypassButton.setToggleState(false, false);
+    reverseButton.setToggleState(false, false);
+    reverseButton.setEnabled(enableIRParameters);
+    reverseButton.onClick = [this] {
+        audioProcessor.updateIRParameters();
+        shouldPaintWaveform = true;
+        repaint();
+    };
 
     bypassButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.apvts, "bypass", bypassButton);
-    
+    reverseButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.apvts, "reverse", reverseButton);
     
     rotary1.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // vertical? horizontal? ya da her ikisi birden mi?
     rotary2.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag); // e.g., ableton vertical kullanıyor
@@ -43,7 +51,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     
     rotary1.setRange(0.0, 200.0, 1);
     rotary1.setValue(100);
-    // rotary1.setTextValueSuffix(" %");
+    rotary1.setTextValueSuffix(" s");
     //    rotary1.setPopupDisplayEnabled(true, true, &rotary1Label);
     rotary1.setPopupMenuEnabled(true);
     rotary1Label.setText("Decay", juce::dontSendNotification);
@@ -51,6 +59,13 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
     rotary1Label.setJustificationType (juce::Justification::centred);
     rotary1Label.setColour(juce::Label::textColourId, juce::Colour(0xffAE9D7A));
     decaySliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "decay", rotary1);
+    rotary1.setEnabled(enableIRParameters);
+    rotary1.onDragEnd = [this]
+    {
+        audioProcessor.updateIRParameters();
+        shouldPaintWaveform = true;
+        repaint();
+    };
 
 
     
@@ -153,6 +168,7 @@ ALHReverbAudioProcessorEditor::ALHReverbAudioProcessorEditor (ALHReverbAudioProc
 
 ALHReverbAudioProcessorEditor::~ALHReverbAudioProcessorEditor()
 {
+    juce::LookAndFeel::setDefaultLookAndFeel(nullptr);
 }
 
 //==============================================================================
@@ -255,6 +271,7 @@ void ALHReverbAudioProcessorEditor::resized()
     rotary6Label.setBounds(rotary6.getX(), rotary6.getY() - 10, rotary6.getWidth(), 10);
 
     bypassButton.setBounds(120, 205, 60, 20);
+    reverseButton.setBounds(397, 205, 70, 20);
     
     styleMenu.setBounds(150,240,320,22);
 }

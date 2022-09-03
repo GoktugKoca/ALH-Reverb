@@ -72,6 +72,7 @@ public:
 
     // Value Trees
     juce::AudioProcessorValueTreeState apvts;
+
     
 
 private:

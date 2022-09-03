@@ -22,12 +22,10 @@ ALHReverbAudioProcessor::ALHReverbAudioProcessor()
                        ), apvts(*this, nullptr, "PARAMETERS", createParameterLayout()) // apvts construction
 #endif
 {
-    apvts.addParameterListener("gain", this);
 }
 
 ALHReverbAudioProcessor::~ALHReverbAudioProcessor()
 {
-    apvts.removeParameterListener("gain", this);
 }
 
 //==============================================================================
@@ -395,6 +393,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 
 void ALHReverbAudioProcessor::parameterChanged(const juce::String& parameterID, float newValue)
 {
-  
-
 }
